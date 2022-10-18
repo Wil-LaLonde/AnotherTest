@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab2Solution.MainPage">
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Clue Compendium label -->
+            <Label Grid.Row="0" 
+                   Grid.ColumnSpan="2" 
+                   Text="Clue Compendium" 
+                   HorizontalTextAlignment="Center"  
+                   FontSize="48"
+                   FontAttributes="Bold"
+                   Padding="20"/>
+
+            <VerticalStackLayout Grid.Row="1" Grid.Column="0" WidthRequest="200">
+                <!-- Add Entry button -->
+                <Button Text="Add Entry" 
+                        Clicked="AddEntry"
+                        BackgroundColor="LightGray"
+                        TextColor="Black"
+                        FontSize="20"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        CornerRadius="0"
+                        Padding="20"
+                        Margin="10"/>
+                <!-- Delete Entry button -->
+                <Button Text="Delete Entry" 
+                        Clicked="DeleteEntry" 
+                        BackgroundColor="LightGray"
+                        TextColor="Black"
+                        FontSize="20"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        CornerRadius="0"
+                        Padding="20"
+                        Margin="10"/>
+                <!-- Edit Entry button -->
+                <Button Text="Edit Entry" 
+                        Clicked="EditEntry" 
+                        BackgroundColor="LightGray"
+                        TextColor="Black"
+                        FontSize="20"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        CornerRadius="0"
+                        Padding="20"
+                        Margin="10"/>
+                <!-- Clue Sort button -->
+                <Button Text="Clue Sort"
+                        Clicked="ClueSort"
+                        Background="LightGray"
+                        TextColor="Black"
+                        FontSize="20"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        CornerRadius="0"
+                        Padding="10"
+                        Margin="10, 100, 10, 10"/>
+                <!-- Answer Sort button -->
+                <Button Text="Answer Sort"
+                        Clicked="AnswerSort"
+                        Background="LightGray"
+                        TextColor="Black"
+                        FontSize="20"
+                        BorderColor="Black"
+                        BorderWidth="2"
+                        CornerRadius="0"
+                        Padding="10"
+                        Margin="10"/>
+            </VerticalStackLayout>
+
+            <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="Transparent" BorderColor="Black" CornerRadius="0" Margin="10" Padding="3">
+                <ListView Grid.Row="1" Grid.Column="1" x:Name="EntriesLV" ItemSelected="EntriesLV_ItemSelected" MaximumHeightRequest="475" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid RowSpacing="6" ColumnSpacing="0" Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Answer, StringFormat='{0} - '}" FontSize="18"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Clue, StringFormat='{0} - '}" FontAttributes="Bold" FontSize="18"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="{Binding Date, StringFormat='{0} - '}" FontAttributes="Bold" FontSize="18"/>
+                                    <Label Grid.Row="0" Grid.Column="3" Text="{Binding Difficulty}" FontAttributes="Bold" FontSize="18"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+
+            <Frame Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="Transparent" BorderColor="Black" CornerRadius="0" Margin="10">
+                <Grid Grid.Row="2" Grid.ColumnSpan="2" RowSpacing="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Clue: label -->
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Text="Clue: "
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           FontSize="20"
+                           FontAttributes="Bold"/>
+                    <!-- Clue Frame and Entry box -->
+                    <Frame Grid.Row="0" Grid.Column="1" CornerRadius="0" BorderColor="Black" Margin="5">
+                        <Entry Grid.Row="0"
+                               Grid.Column="1"
+                               FontSize="20"
+                               Margin="-5"
+                               VerticalOptions="Center"
+                               Placeholder="Clue goes here... (1-250 characters)"
+                               PlaceholderColor="LightGray"
+                               x:Name="clueENT"/>
+                    </Frame>
+                    <!-- Answer: label -->
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           Text="Answer: "
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           FontSize="20"
+                           FontAttributes="Bold"/>
+                    <!-- Answer Frame and Entry box -->
+                    <Frame Grid.Row="1" Grid.Column="1" CornerRadius="0" BorderColor="Black" Margin="5">
+                        <Entry Grid.Row="1"
+                               Grid.Column="1"
+                               FontSize="20"
+                               Margin="-5"
+                               VerticalOptions="Center"
+                               Placeholder="Answer goes here... (1-25 characters)"
+                               PlaceholderColor="LightGray"
+                               x:Name="answerENT"/>
+                    </Frame>
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- Difficulty: label -->
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Difficulty: "
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               FontSize="20"
+                               FontAttributes="Bold"/>
+                        <!-- Difficulty Frame and Entry box -->
+                        <Frame Grid.Row="0" Grid.Column="1" CornerRadius="0" BorderColor="Black" Margin="5">
+                            <Entry Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="20"
+                                   Margin="-5"
+                                   VerticalOptions="Center"
+                                   Placeholder="# (0,1,2)"
+                                   PlaceholderColor="LightGray"
+                                   x:Name="difficultyENT"/>
+                        </Frame>
+                        <!-- Date: label -->
+                        <Label Grid.Row="0"
+                               Grid.Column="3"
+                               Text="Date: "
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               FontSize="20"
+                               FontAttributes="Bold"/>
+                        <!-- Date Frame and Entry box -->
+                        <Frame Grid.Row="0" Grid.Column="4" CornerRadius="0" BorderColor="Black" Margin="5">
+                            <Entry Grid.Row="0"
+                                   Grid.Column="4"
+                                   FontSize="20"
+                                   Margin="-5"
+                                   VerticalOptions="Center"
+                                   Placeholder="mm/dd/yyyy"
+                                   PlaceholderColor="LightGray"
+                                   x:Name="dateENT"/>
+                        </Frame>
+                    </Grid>
+                </Grid>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage>
